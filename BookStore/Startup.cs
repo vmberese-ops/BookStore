@@ -19,6 +19,9 @@ namespace BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+#if DEBUG
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,12 +35,6 @@ namespace BookStore
             app.UseRouting();
 
             app.UseStaticFiles();
-
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
-                RequestPath = "/MyStaticFiles"
-            });
 
             app.UseEndpoints(endpoints =>
             {
