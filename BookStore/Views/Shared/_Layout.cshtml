@@ -4,7 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"] | Book Store Application</title>
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <environment names="Development">
+        <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    </environment>
+
+    <environment names="Production, Staging">
+        <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    </environment>
     <link href="~/css/Site.css" rel="stylesheet" />
 </head>
 <body>
@@ -19,16 +25,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/aboutus">About</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="AboutUs">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/contactus">Contact</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/book/getallbooks">All Books</a>
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="GetAllBooks">All Books</a>
                         </li>
                     </ul>
                 </div>
@@ -48,10 +54,8 @@
             &copy; @DateTime.Now.Year - BookStore - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
-<script src="~/lib/jquery/jquery.js"></script>
-
-@RenderSection("scripts", required: false)
-
-<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
 </html>
